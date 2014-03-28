@@ -8,6 +8,10 @@
 require 'fileutils'
 
 action :extract do
+  unless ::File.exist?(new_resource.path)
+    raise Errno::ENOENT, "no archive found at #{new_resource.path}"
+  end
+
   package "libarchive12" do
     action :nothing
   end.run_action(:install)
@@ -16,42 +20,36 @@ action :extract do
     action :nothing
   end.run_action(:install)
 
-  chef_gem "libarchive-ruby"
-
-  Chef::Log.info "libarchive_file[#{new_resource.path}] extracting to #{new_resource.extract_to}"
-  updated = extract(new_resource.path, new_resource.extract_to, force: new_resource.force, owner: new_resource.owner,
-    group: new_resource.group)
-  new_resource.updated_by_last_action(updated)
-end
-
-private
-
-  # @param [String] @src
-  # @param [String] dest
-  #
-  # @option options [String] :owner
-  # @option options [String] :group
-  def extract(src, dest, options = {})
-    require 'archive'
-
-    unless ::File.exist?(src)
-      raise Errno::ENOENT, "no archive found at #{src}"
-    end
-
-    if options[:force]
-      FileUtils.rm_rf(dest)
-    end
-
-    return false if ::File.exist?(dest)
-
-    FileUtils.mkdir_p(dest)
-    Dir.chdir(dest) do
-      ::Archive.new(src).extract
-    end
-
-    if options[:owner] || options[:group]
-      FileUtils.chown_R(options[:owner], options[:group], dest)
-    end
-
-    true
+  chef_gem "libarchive-ruby" do
+    version "0.0.3"
   end
+
+  directory new_resource.extract_to do
+    owner new_resource.owner
+    group new_resource.group
+    recursive true
+
+    if new_resource.force
+      action [:delete, :create]
+    else
+      action :create
+    end
+  end
+
+  ruby_block "extracting #{new_resource.path} to #{new_resource.extract_to}" do
+    block do
+      require 'archive'
+
+      updated = LibArchiveCookbook::Helper.extract(new_resource.path, new_resource.extract_to,
+        Array(new_resource.extract_options))
+
+      if new_resource.owner || new_resource.group
+        FileUtils.chown_R(new_resource.owner, new_resource.group, new_resource.extract_to)
+      end
+
+      new_resource.updated_by_last_action(updated)
+    end
+
+    action :run
+  end
+end
