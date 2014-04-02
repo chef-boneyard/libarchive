@@ -24,7 +24,7 @@ action :extract do
     version "0.0.3"
   end
 
-  FileUtils.mkdir_p(new_resource.extract_to)
+  FileUtils.mkdir_p(new_resource.extract_to, mode: new_resource.mode)
 
   Chef::Log.info "libarchive_file[#{new_resource.name}] extracting #{new_resource.path} to #{new_resource.extract_to}"
   updated = LibArchiveCookbook::Helper.extract(new_resource.path, new_resource.extract_to,
