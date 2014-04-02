@@ -28,6 +28,8 @@ module LibArchiveCookbook
       #
       # @return [Boolean]
       def extract(src, dest, extract_options = [])
+        require 'archive'
+
         extract_options ||= Array.new
         extract_options.collect! { |option| extract_option_map[option] }.compact!
 
