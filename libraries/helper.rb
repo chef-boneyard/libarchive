@@ -25,15 +25,33 @@ module LibArchiveCookbook
       # @param [String] src
       # @param [String] dest
       # @param [Array] extract_options
+      #
+      # @return [Boolean]
       def extract(src, dest, extract_options = [])
         extract_options ||= Array.new
         extract_options.collect! { |option| extract_option_map[option] }.compact!
 
         Dir.chdir(dest) do
-          ::Archive.new(src).extract(extract: extract_options.reduce(:|))
+          archive       = ::Archive.new(src)
+          archive_files = archive.map { |entry| entry.path }
+
+          existing, missing = archive_files.partition { |f| File.exist?(File.join(dest, f)) }
+          current_times     = existing.reduce({}) { |times, f| times[f] = File.mtime(f); times }
+
+          archive.extract(extract: extract_options.reduce(:|))
+
+          unless missing.empty?
+            # are all files which were missing no longer missing?
+            still_missing = missing.reject { |f| File.exist?(f) }
+            return true if still_missing.length < missing.length
+          end
+
+          # any existing files have their mtimes changed?
+          changed_files = current_times.select { |file, time| File.mtime(file) != time }
+          return true unless changed_files.empty?
         end
 
-        true
+        false
       end
     end
   end
