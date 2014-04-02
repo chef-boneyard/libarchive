@@ -7,6 +7,8 @@
 
 require 'fileutils'
 
+use_inline_resources
+
 action :extract do
   unless ::File.exist?(new_resource.path)
     raise Errno::ENOENT, "no archive found at #{new_resource.path}"
