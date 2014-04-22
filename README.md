@@ -1,10 +1,31 @@
 # libarchive-cookbook
 
-A library cookbook that provides LWRP's for extracting archive files
+A library cookbook that provides LWRPs for extracting archive files
 
 ## Supported Platforms
 
 * Ubuntu
+
+## Usage
+
+```ruby
+include_recipe "libarchive::default"
+
+libarchive_file "my_archive.tar.gz" do
+  path "/path/to/artifact/my_archive.tar.gz"
+  extract_to "/path/to/extraction"
+  owner "reset"
+  group "reset"
+
+  action :extract
+end
+```
+
+## Recipes
+
+### libarchive::default
+
+Include this recipe before leveraging any of the LWRPs provided by this cookbook. It will install the necessary libarchive packages on your node and the necessary libarchive rubygem as a chef_gem.
 
 ## libarchive_file Resource/Provider
 
