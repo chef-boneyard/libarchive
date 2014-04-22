@@ -12,10 +12,6 @@ action :extract do
     raise Errno::ENOENT, "no archive found at #{new_resource.path}"
   end
 
-  package "libarchive12" do
-    action :nothing
-  end.run_action(:install)
-
   package "libarchive-dev" do
     action :nothing
   end.run_action(:install)
