@@ -9,3 +9,4 @@ version          "0.4.0"
 supports "ubuntu"
 
 depends "build-essential", "~> 2.0"
+depends "apt", "~> 2.5"

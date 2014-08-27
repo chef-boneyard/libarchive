@@ -5,6 +5,11 @@
 # Author:: Jamie Winsor (<jamie@vialstudios.com>)
 #
 
+if platform_family?("debian")
+  node.set[:apt][:compile_time_update] = true
+  include_recipe "apt::default"
+end
+
 node.set[:'build-essential'][:compile_time] = true
 include_recipe "build-essential::default"
 
