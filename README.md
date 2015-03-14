@@ -5,6 +5,7 @@ A library cookbook that provides LWRPs for extracting archive files
 ## Supported Platforms
 
 * Ubuntu
+* Arch Linux
 
 ## Usage
 
