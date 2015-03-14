@@ -25,7 +25,7 @@ when platform_family?("rhel")
   package "libarchive-devel" do
     action :nothing
   end.run_action(:install)
-when platform_family("arch")
+when platform_family?("arch")
   package "libarchive" do
     action :nothing
   end.run_action(:install)
