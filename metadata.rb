@@ -7,6 +7,7 @@ long_description "A library cookbook for extracting archive files"
 version          "0.4.1"
 
 supports "ubuntu"
+supports "arch"
 
 depends "build-essential", "~> 2.0"
 depends "apt", "~> 2.5"
