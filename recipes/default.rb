@@ -29,6 +29,10 @@ when platform_family?("arch")
   package "libarchive" do
     action :nothing
   end.run_action(:install)
+when platform_family?("mac_os_x")
+  package "libarchive" do
+    action :nothing
+  end.run_action(:install)
 else
   Chef::Application.fatal! "[libarchive] unsupported platform family: #{node[:platform_family]}"
 end

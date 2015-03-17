@@ -8,6 +8,7 @@ version          "0.4.1"
 
 supports "ubuntu"
 supports "arch"
+supports "mac_os_x"
 
 depends "build-essential", "~> 2.0"
 depends "apt", "~> 2.5"
