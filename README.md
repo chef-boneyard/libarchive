@@ -2,6 +2,10 @@
 
 A library cookbook that provides LWRPs for extracting archive files
 
+## Requirements
+
+* Chef ~> 12.1
+
 ## Supported Platforms
 
 * Ubuntu

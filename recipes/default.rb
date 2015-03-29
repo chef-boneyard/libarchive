@@ -6,11 +6,9 @@
 #
 
 if platform_family?("debian")
-  node.set[:apt][:compile_time_update] = true
   include_recipe "apt::default"
 end
 
-node.set[:'build-essential'][:compile_time] = true
 include_recipe "build-essential::default"
 
 case
@@ -39,5 +37,5 @@ end
 
 chef_gem "libarchive-ruby" do
   version "0.0.3"
-  compile_time true if respond_to?(:compile_time)
+  compile_time false
 end
