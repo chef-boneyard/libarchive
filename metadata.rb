@@ -4,7 +4,7 @@ maintainer_email "jamie@vialstudios.com"
 license          "Apache 2.0"
 description      "A library cookbook for extracting archive files"
 long_description "A library cookbook for extracting archive files"
-version          "0.4.3"
+version          "0.4.4"
 
 supports "ubuntu"
 supports "arch"
