@@ -15,4 +15,4 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[libarchive::default]
+      - recipe[test-libarchive::default]

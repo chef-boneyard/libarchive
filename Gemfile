@@ -19,12 +19,15 @@ group :kitchen_cloud do
 end
 
 group :unit do
-  gem 'berkshelf'
   gem 'chefspec'
 end
 
 group :integration do
   gem 'serverspec'
+end
+
+group :unit, :integration do
+  gem 'berkshelf'
 end
 
 group :development do
