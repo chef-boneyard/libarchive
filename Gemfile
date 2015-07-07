@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-gem 'ffi-libarchive'
 
 group :lint do
   gem 'foodcritic'
@@ -35,5 +34,6 @@ group :development do
   gem 'guard-foodcritic'
   gem 'guard-rspec'
   gem 'guard-rubocop'
+  gem 'pry-byebug'
   gem 'rake'
 end
