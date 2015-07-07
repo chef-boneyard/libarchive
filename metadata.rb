@@ -14,4 +14,3 @@ supports "mac_os_x"
 
 depends "apt", "~> 2.5"
 depends "yum-epel", "~> 0.6"
-depends 'ffi-libarchive'

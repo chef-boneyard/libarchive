@@ -1,5 +1,4 @@
 source 'https://supermarket.chef.io'
-cookbook 'ffi-libarchive', path: '~/Projects/ffi-libarchive-cookbook/pkg/ffi-libarchive-1.0.0'
 metadata
 
 group :test, :integration do

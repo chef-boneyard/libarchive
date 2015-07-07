@@ -15,18 +15,14 @@ package node['libarchive']['package_name'] do
   action :nothing
 end.run_action(:upgrade)
 
-# TODO: (jbellone) Remove this comment block if we're able to get a
-# new cut of the ffi-libarchive gem. Otherwise we need some patches in
-# order to get the Archive::Reader#extract method working properly.
-
-# if Chef::Resource::ChefGem.instance_methods(false).include?(:compile_time)
-#   chef_gem 'ffi-libarchive' do
-#     version '0.1.4'
-#     compile_time true
-#   end
-# else
-#   chef_gem 'ffi-libarchive' do
-#     version '0.1.4'
-#     action :nothing
-#   end.run_action(:install)
-# end
+if Chef::Resource::ChefGem.instance_methods(false).include?(:compile_time)
+  chef_gem 'ffi-libarchive' do
+    version '~> 0.2.0'
+    compile_time true
+  end
+else
+  chef_gem 'ffi-libarchive' do
+    version '~> 0.2.0'
+    action :nothing
+  end.run_action(:install)
+end
