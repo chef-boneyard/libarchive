@@ -7,11 +7,11 @@
 
 include_recipe 'apt::default' if platform_family?('debian')
 if platform_family?('redhat')
-  include_recipe 'yum-epel::default' if node['platform_version'].to_i == 5
+  include_recipe 'yum-epel::default' if node[:platform_version].to_i == 5
 end
 
-package node['libarchive']['package_name'] do
-  version node['libarchive']['package_version'] if node['libarchive']['package_version']
+package node[:libarchive][:package_name] do
+  version node[:libarchive][:package_version] if node[:libarchive][:package_version]
   action :nothing
 end.run_action(:upgrade)
 
