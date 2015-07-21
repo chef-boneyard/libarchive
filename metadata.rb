@@ -7,8 +7,10 @@ long_description "A library cookbook for extracting archive files"
 version          "0.5.0"
 
 supports "ubuntu"
+supports "centos"
+supports "redhat"
 supports "arch"
 supports "mac_os_x"
 
-depends "build-essential", "~> 2.0"
 depends "apt", "~> 2.5"
+depends "yum-epel", "~> 0.6"
