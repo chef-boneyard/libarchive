@@ -4,10 +4,11 @@
 #
 # Author:: Jamie Winsor (<jamie@vialstudios.com>)
 #
+
 module LibArchiveCookbook
   module Helper
     class << self
-      # This can't be a constant since we might not have required 'ffi-archive' yet.
+      # This can't be a constant since we might not have required 'ffi-libarchive' yet.
       def extract_option_map
         {
           owner: Archive::EXTRACT_OWNER,
