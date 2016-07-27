@@ -46,10 +46,8 @@ module LibArchiveCookbook
 
             archive.extract(e, flags.to_i)
           end
-          
-          archive.close()
+          archive.close
         end
-
         modified
       end
     end
