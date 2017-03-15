@@ -11,5 +11,3 @@ supports "centos"
 supports "redhat"
 supports "arch"
 supports "mac_os_x"
-
-depends "apt", ">= 2.5"

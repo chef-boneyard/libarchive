@@ -5,8 +5,6 @@
 # Author:: Jamie Winsor (<jamie@vialstudios.com>)
 #
 
-include_recipe 'apt::default' if platform_family?('debian')
-
 package node[:libarchive][:package_name] do
   version node[:libarchive][:package_version] if node[:libarchive][:package_version]
   action :nothing
