@@ -1,13 +1,13 @@
-name             "libarchive"
-maintainer       "Jamie Winsor"
-maintainer_email "jamie@vialstudios.com"
-license          "Apache 2.0"
-description      "A library cookbook for extracting archive files"
-long_description "A library cookbook for extracting archive files"
-version          "0.6.2"
+name             'libarchive'
+maintainer       'Jamie Winsor'
+maintainer_email 'jamie@vialstudios.com'
+license          'Apache 2.0'
+description      'A library cookbook for extracting archive files'
+long_description 'A library cookbook for extracting archive files'
+version          '0.6.2'
 
-supports "ubuntu"
-supports "centos"
-supports "redhat"
-supports "arch"
-supports "mac_os_x"
+supports 'ubuntu'
+supports 'centos'
+supports 'redhat'
+supports 'arch'
+supports 'mac_os_x'

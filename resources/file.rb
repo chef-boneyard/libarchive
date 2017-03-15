@@ -13,4 +13,4 @@ attribute :owner, kind_of: String
 attribute :group, kind_of: String
 attribute :mode, kind_of: Integer, default: 0755
 attribute :extract_to, kind_of: String, required: true
-attribute :extract_options, kind_of: [Array, Symbol], default: Array.new
+attribute :extract_options, kind_of: [Array, Symbol], default: []
