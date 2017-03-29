@@ -4,14 +4,15 @@ driver:
 
 provisioner:
   name: chef_zero
+  deprecations_as_errors: true
 
 platforms:
   - name: ubuntu-14.04
-  - name: ubuntu-12.04
-  - name: centos-7.1
-  - name: centos-6.6
+  - name: ubuntu-16.04
+  - name: centos-6.8
+  - name: centos-7.3
 
 suites:
   - name: default
     run_list:
-      - recipe[test-libarchive::default]
+      - recipe[test]
