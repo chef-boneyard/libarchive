@@ -4,7 +4,7 @@ A library cookbook that provides LWRPs for extracting archive files
 
 ## Requirements
 
-* Chef ~> 12.1
+* Chef ~> 12.7
 
 ## Supported Platforms
 
