@@ -5,8 +5,8 @@
 # Author:: Jamie Winsor (<jamie@vialstudios.com>)
 #
 
-package node[:libarchive][:package_name] do
-  version node[:libarchive][:package_version] if node[:libarchive][:package_version]
+package node['libarchive']['package_name'] do
+  version node['libarchive']['package_version'] if node['libarchive']['package_version']
   action :nothing
 end.run_action(:upgrade)
 

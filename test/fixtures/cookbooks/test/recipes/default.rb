@@ -1,3 +1,6 @@
+apt_update 'update' do
+end.run_action(:update) if platform_family?('debian')
+
 include_recipe 'libarchive::default'
 
 zipball = remote_file 'twbs-v3.3.4.zip' do
