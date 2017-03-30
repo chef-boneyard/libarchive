@@ -10,14 +10,7 @@ package node['libarchive']['package_name'] do
   action :nothing
 end.run_action(:upgrade)
 
-if Chef::Resource::ChefGem.instance_methods(false).include?(:compile_time)
-  chef_gem 'ffi-libarchive' do
-    version '~> 0.2.0'
-    compile_time true
-  end
-else
-  chef_gem 'ffi-libarchive' do
-    version '~> 0.2.0'
-    action :nothing
-  end.run_action(:install)
+chef_gem 'ffi-libarchive' do
+  version '~> 0.2.0'
+  compile_time true
 end
