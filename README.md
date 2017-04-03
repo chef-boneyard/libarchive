@@ -56,6 +56,7 @@ Include this recipe before leveraging any of the LWRPs provided by this cookbook
 
 Author:: Jamie Winsor (<jamie@vialstudios.com>)
 Author:: John Bellone (<jbellone@bloomberg.net>)
+Author:: Jennifer Davis (<sigje@chef.io>)
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");

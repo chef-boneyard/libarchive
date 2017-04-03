@@ -2,6 +2,10 @@
 
 This file is used to list changes made in each version of the libarchive cookbook.
 
+##
+
+- Convert file LWRP to custom resource
+
 ## 0.7.1 (2017-03-30)
 
 - Update license string to standard Apache-2.0
