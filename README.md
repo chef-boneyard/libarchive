@@ -54,9 +54,9 @@ Include this recipe before using the `libarchive_file` resource provided by this
 
 ## License and Authors
 
-Author:: Jamie Winsor (<jamie@vialstudios.com>)
-Author:: John Bellone (<jbellone@bloomberg.net>)
-Author:: Jennifer Davis (<sigje@chef.io>)
+* Author:: Jamie Winsor (<jamie@vialstudios.com>)
+* Author:: John Bellone (<jbellone@bloomberg.net>)
+* Author:: Jennifer Davis (<sigje@chef.io>)
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
