@@ -1,6 +1,6 @@
 # libarchive-cookbook
 
-A library cookbook that provides LWRPs for extracting archive files
+A library cookbook that provides a custom resource for extracting archive files.
 
 ## Requirements
 
@@ -31,7 +31,7 @@ end
 
 ### libarchive::default
 
-Include this recipe before leveraging any of the LWRPs provided by this cookbook. It will install the necessary libarchive packages on your node and the necessary libarchive rubygem as a chef_gem.
+Include this recipe before using the `libarchive_file` resource provided by this cookbook. It will install the necessary libarchive packages on your node and the necessary libarchive rubygem as a chef_gem.
 
 ## libarchive_file Resource/Provider
 

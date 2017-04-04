@@ -18,7 +18,7 @@ action :extract do
   unless ::File.exist?(new_resource.path)
     raise Errno::ENOENT, "no archive found at #{new_resource.path}"
   end
-  
+
   unless Dir.exist?(new_resource.extract_to)
     converge_by("FileUtils.mkdir_p(#{new_resource.extract_to}, mode: #{new_resource.mode})") do
       FileUtils.mkdir_p(new_resource.extract_to, mode: new_resource.mode.to_i)
@@ -29,8 +29,8 @@ action :extract do
   LibArchiveCookbook::Helper.extract(new_resource.path, new_resource.extract_to,
     Array(new_resource.extract_options))
 
-  if (new_resource.owner || new_resource.group)
-  	converge_by("FileUtils.chown_R(#{new_resource.owner}, #{new_resource.group}, #{new_resource.extract_to})") do
+  if new_resource.owner || new_resource.group
+    converge_by("FileUtils.chown_R(#{new_resource.owner}, #{new_resource.group}, #{new_resource.extract_to})") do
       FileUtils.chown_R(new_resource.owner, new_resource.group, new_resource.extract_to)
     end
   end

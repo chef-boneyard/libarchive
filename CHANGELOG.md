@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of the libarchive cookbook.
 
-##
+## 1.0.0 (2017-04-03)
 
 - Convert file LWRP to custom resource
 
