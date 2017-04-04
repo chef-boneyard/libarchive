@@ -5,12 +5,33 @@
 # Author:: Jamie Winsor (<jamie@vialstudios.com>)
 #
 
-actions :extract
-default_action :extract
+property :path, String, name_property: true, required: true
+property :owner, String
+property :group, String
+property :mode, [String, Integer], default: '0755'
+property :extract_to, String, required: true
+property :extract_options, [Array, Symbol], default: []
 
-attribute :path, kind_of: String, name_attribute: true, required: true
-attribute :owner, kind_of: String
-attribute :group, kind_of: String
-attribute :mode, kind_of: Integer, default: 0755
-attribute :extract_to, kind_of: String, required: true
-attribute :extract_options, kind_of: [Array, Symbol], default: []
+require 'fileutils'
+
+action :extract do
+  unless ::File.exist?(new_resource.path)
+    raise Errno::ENOENT, "no archive found at #{new_resource.path}"
+  end
+  
+  unless Dir.exist?(new_resource.extract_to)
+    converge_by("FileUtils.mkdir_p(#{new_resource.extract_to}, mode: #{new_resource.mode})") do
+      FileUtils.mkdir_p(new_resource.extract_to, mode: new_resource.mode.to_i)
+    end
+  end
+
+  Chef::Log.info "libarchive_file[#{new_resource.name}] extracting #{new_resource.path} to #{new_resource.extract_to}"
+  LibArchiveCookbook::Helper.extract(new_resource.path, new_resource.extract_to,
+    Array(new_resource.extract_options))
+
+  if (new_resource.owner || new_resource.group)
+  	converge_by("FileUtils.chown_R(#{new_resource.owner}, #{new_resource.group}, #{new_resource.extract_to})") do
+      FileUtils.chown_R(new_resource.owner, new_resource.group, new_resource.extract_to)
+    end
+  end
+end
