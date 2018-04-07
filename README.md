@@ -1,5 +1,7 @@
 # libarchive-cookbook
 
+[![Build Status](https://travis-ci.org/chef-cookbooks/libarchive.svg?branch=master)](https://travis-ci.org/chef-cookbooks/libarchive) [![Cookbook Version](https://img.shields.io/cookbook/v/libarchive.svg)](https://supermarket.chef.io/cookbooks/libarchive)
+
 Resources for extracting archives of all types with Chef
 
 ## Requirements
@@ -15,9 +17,7 @@ Resources for extracting archives of all types with Chef
 ## Usage
 
 ```ruby
-include_recipe "libarchive::default"
-
-libarchive_file "my_archive.tar.gz" do
+archive_file "my_archive.tar.gz" do
   path "/path/to/artifact/my_archive.tar.gz"
   extract_to "/path/to/extraction"
   owner "reset"
@@ -27,7 +27,7 @@ libarchive_file "my_archive.tar.gz" do
 end
 ```
 
-## libarchive_file Resource
+## archive_file Resource
 
 ### Actions
 
@@ -49,6 +49,7 @@ end
 ## License and Authors
 
 - Author:: Jamie Winsor ([jamie@vialstudios.com](mailto:jamie@vialstudios.com))
+- Author:: Tim Smith ([tsmith@chef.io](mailto:tsmith@chef.io))
 - Author:: John Bellone ([jbellone@bloomberg.net](mailto:jbellone@bloomberg.net))
 - Author:: Jennifer Davis ([sigje@chef.io](mailto:sigje@chef.io))
 
