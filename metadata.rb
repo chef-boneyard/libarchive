@@ -6,11 +6,9 @@ description      'A library cookbook for extracting archive files'
 long_description 'A library cookbook for extracting archive files'
 version          '1.0.0'
 
-supports 'ubuntu'
-supports 'centos'
-supports 'redhat'
-supports 'arch'
-supports 'mac_os_x'
+%w(ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon).each do |os|
+  supports os
+end
 
 source_url 'https://github.com/chef-cookbooks/libarchive'
 issues_url 'https://github.com/chef-cookbooks/libarchive/issues'

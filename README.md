@@ -1,6 +1,6 @@
 # libarchive-cookbook
 
-A library cookbook that provides a custom resource for extracting archive files.
+Resources for extracting archives of all types with Chef
 
 ## Requirements
 
@@ -8,9 +8,9 @@ A library cookbook that provides a custom resource for extracting archive files.
 
 ## Supported Platforms
 
-* Ubuntu
-* CentOS (RHEL)
-* Arch Linux
+- Ubuntu / Debian
+- RHEL / Amazon / Fedora
+- SLES / openSUSE
 
 ## Usage
 
@@ -33,13 +33,13 @@ end
 
 Include this recipe before using the `libarchive_file` resource provided by this cookbook. It will install the necessary libarchive packages on your node and the necessary libarchive rubygem as a chef_gem.
 
-## libarchive_file Resource/Provider
+## libarchive_file Resource
 
 ### Actions
 
 - **extract** - extracts the contents of the archive to the destination on disk. (default)
 
-### Paramter Attributes
+### Properties
 
 - **path** - filepath to the archive to extract (name attribute)
 - **owner** - set the owner of the extracted files
@@ -54,9 +54,9 @@ Include this recipe before using the `libarchive_file` resource provided by this
 
 ## License and Authors
 
-* Author:: Jamie Winsor (<jamie@vialstudios.com>)
-* Author:: John Bellone (<jbellone@bloomberg.net>)
-* Author:: Jennifer Davis (<sigje@chef.io>)
+- Author:: Jamie Winsor ([jamie@vialstudios.com](mailto:jamie@vialstudios.com))
+- Author:: John Bellone ([jbellone@bloomberg.net](mailto:jbellone@bloomberg.net))
+- Author:: Jennifer Davis ([sigje@chef.io](mailto:sigje@chef.io))
 
 ```
 Licensed under the Apache License, Version 2.0 (the "License");
