@@ -4,7 +4,7 @@ zipball = remote_file 'twbs-v3.3.4.zip' do
   checksum '9af5ebe4e079ac0a07d6785852b62342ac38ef8186352e7ad1f534a16e7a0672'
 end
 
-libarchive_file 'twbs-v3.3.4.zip' do
+archive_file 'twbs-v3.3.4.zip' do
   path zipball.path
   extract_to '/tmp/twbs-v3.3.4'
 end
