@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: libarchive
+# Cookbook:: libarchive
 # Library:: helper
 #
 # Author:: Jamie Winsor (<jamie@vialstudios.com>)

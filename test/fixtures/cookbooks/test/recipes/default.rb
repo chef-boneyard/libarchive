@@ -1,8 +1,3 @@
-apt_update 'update' do
-end.run_action(:update) if platform_family?('debian')
-
-include_recipe 'libarchive::default'
-
 zipball = remote_file 'twbs-v3.3.4.zip' do
   path File.join(Chef::Config[:file_cache_path], name)
   source 'https://github.com/twbs/bootstrap/releases/download/v3.3.4/bootstrap-3.3.4-dist.zip'

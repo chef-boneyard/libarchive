@@ -4,7 +4,7 @@ Resources for extracting archives of all types with Chef
 
 ## Requirements
 
-* Chef ~> 12.7
+- Chef >= 14.0
 
 ## Supported Platforms
 
@@ -26,12 +26,6 @@ libarchive_file "my_archive.tar.gz" do
   action :extract
 end
 ```
-
-## Recipes
-
-### libarchive::default
-
-Include this recipe before using the `libarchive_file` resource provided by this cookbook. It will install the necessary libarchive packages on your node and the necessary libarchive rubygem as a chef_gem.
 
 ## libarchive_file Resource
 
