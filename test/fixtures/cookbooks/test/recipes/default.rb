@@ -6,5 +6,5 @@ end
 
 archive_file 'twbs-v3.3.4.zip' do
   path zipball.path
-  extract_to '/tmp/twbs-v3.3.4'
+  extract_to File.join(File.dirname(zipball.path), 'twbs-v3.3.4')
 end
