@@ -4,7 +4,7 @@ maintainer_email 'cookbooks@chef.io'
 license          'Apache-2.0'
 description      'A library cookbook for extracting archive files'
 long_description 'A library cookbook for extracting archive files'
-version          '2.0.0'
+version          '2.1.0'
 
 %w(windows ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon).each do |os|
   supports os

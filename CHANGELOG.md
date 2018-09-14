@@ -2,6 +2,11 @@
 
 This file is used to list changes made in each version of the libarchive cookbook.
 
+## 2.1.0 (2018-09-14)
+
+- Add Windows support
+- Add support for NO_OVERWRITE_NEWER
+
 ## 2.0.0 (2018-04-07)
 
 This cookbook now utilizes the libarchive built into Chef 14 to extract archives. There is no longer a need to install libarchive packages onto the host and because of this the cookbook now works on any platform supported by Chef. The libarchive_file resource has been renamed archive_file and the default recipe no longer performs any installation actions.
