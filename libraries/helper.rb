@@ -19,6 +19,7 @@ module LibArchiveCookbook
           fflags: Archive::EXTRACT_FFLAGS,
           extended_information: Archive::EXTRACT_XATTR,
           xattr: Archive::EXTRACT_XATTR,
+          no_overwrite_newer: Archive::EXTRACT_NO_OVERWRITE_NEWER,
         }
       end
 
