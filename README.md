@@ -13,6 +13,7 @@ Resources for extracting archives of all types with Chef
 - Ubuntu / Debian
 - RHEL / Amazon / Fedora
 - SLES / openSUSE
+- Windows
 
 ## Usage
 
