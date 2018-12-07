@@ -77,9 +77,9 @@ action_class do
       archive = Archive::Reader.open_filename(src)
 
       archive.each_entry do |e|
-        pathname = File.expand_path(e.pathname)
-        if File.exist?(pathname)
-          modified = true unless File.mtime(pathname) == e.mtime
+        pathname = ::File.expand_path(e.pathname)
+        if ::File.exist?(pathname)
+          modified = true unless ::File.mtime(pathname) == e.mtime
         else
           modified = true
         end
