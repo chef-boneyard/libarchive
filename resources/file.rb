@@ -10,7 +10,7 @@
 resource_name :archive_file
 provides :libarchive_file
 
-property :path, String, name_property: true
+property :path, String, name_property: true, coerce: proc { |f| ::File.expand_path(f)},
 property :owner, String
 property :group, String
 property :mode, [String, Integer], default: '755'
