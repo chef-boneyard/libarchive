@@ -35,7 +35,7 @@ action :extract do
   end
 
   converge_by("extract #{new_resource.path} to #{new_resource.destination}") do
-    LibArchiveCookbook::Helper.extract(new_resource.path, new_resource.destination,
+    extract(new_resource.path, new_resource.destination,
       Array(new_resource.options))
   end
 
