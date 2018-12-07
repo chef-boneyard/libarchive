@@ -2,7 +2,9 @@
 # Cookbook Name:: libarchive
 # Resource:: file
 #
+# Copyright:: 2017-2018 Chef Software, Inc.
 # Author:: Jamie Winsor (<jamie@vialstudios.com>)
+# Author:: Tim Smith (<tsmith@chef.io>)
 #
 
 resource_name :archive_file
