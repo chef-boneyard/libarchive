@@ -20,7 +20,7 @@ Resources for extracting archives of all types with Chef
 ```ruby
 archive_file "my_archive.tar.gz" do
   path "/path/to/artifact/my_archive.tar.gz"
-  extract_to "/path/to/extraction"
+  destination "/path/to/extraction"
   owner "reset"
   group "reset"
 
@@ -40,8 +40,8 @@ end
 - **owner** - set the owner of the extracted files
 - **group** - set the group of the extracted files
 - **mode** - set the mode of the extracted files
-- **extract_to** - filepath to extract the contents of the archive to
-- **extract_options** - an array of symbols representing extraction flags. See extract options below.
+- **destination** - filepath to extract the contents of the archive to
+- **options** - an array of symbols representing extraction flags. See extract options below.
 
 ### Extract Options
 
