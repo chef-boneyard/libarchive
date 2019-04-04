@@ -1,10 +1,10 @@
 sudo: required
-dist: trusty
+dist: xenial
 
 addons:
   apt:
     sources:
-      - chef-current-trusty
+      - chef-current-xenial
     packages:
       - chefdk
 
@@ -27,7 +27,6 @@ env:
   - INSTANCE=default-debian-9
   - INSTANCE=default-fedora-latest
   - INSTANCE=default-opensuse-leap
-  - INSTANCE=default-ubuntu-1404
   - INSTANCE=default-ubuntu-1604
   - INSTANCE=default-ubuntu-1804
 
