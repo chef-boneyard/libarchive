@@ -10,12 +10,30 @@
 resource_name :archive_file
 provides :libarchive_file
 
-property :path, String, name_property: true, coerce: proc { |f| ::File.expand_path(f) }
-property :owner, String
-property :group, String
-property :mode, [String, Integer], default: '755'
-property :destination, String, required: true
-property :options, [Array, Symbol], default: lazy { [] }
+description 'Use the archive_file resource to extract archive files to disk. This resource uses the libarchive library to extract multiple archive formats including tar, gzip, bzip, and zip formats.'
+
+property :path, String,
+         name_property: true,
+         coerce: proc { |f| ::File.expand_path(f) },
+         description: "An optional property to set the file path to the archive to extract if it differs from the resource block's name."
+
+property :owner, String,
+         description: 'The owner of the extracted files'
+
+property :group, String,
+         description: 'The group of the extracted files'
+
+property :mode, [String, Integer],
+         description: 'The mode of the extracted files',
+         default: '755'
+
+property :destination, String,
+         description: 'The file path to extract the archive file to.',
+         required: true
+
+property :options, [Array, Symbol],
+         description: 'An array of symbols representing extraction flags. Example: :no_overwrite to prevent overwriting files on disk.',
+         default: lazy { [] }
 
 # backwards compatibility for the legacy names when we only had an :extract action
 alias_method :extract_options, :options
@@ -24,6 +42,8 @@ alias_method :extract_to, :destination
 require 'fileutils'
 
 action :extract do
+  description 'Extract and archive file.'
+
   unless ::File.exist?(new_resource.path)
     raise Errno::ENOENT, "No archive found at #{new_resource.path}!"
   end
