@@ -35,6 +35,10 @@ property :options, [Array, Symbol],
          description: 'An array of symbols representing extraction flags. Example: :no_overwrite to prevent overwriting files on disk.',
          default: lazy { [] }
 
+property :overwrite, [TrueClass, FalseClass, :auto],
+         description: 'Should the resource overwrite the destination file contents if they already exist? If set to :auto the date stamp of files within the archive will be compared to those on disk, and if newer the disk contents will be overwritten. Be aware that this method does not work for all archive types, and should be tested before being used as it may result in the files being replaced during each client run.',
+         default: false
+
 # backwards compatibility for the legacy names when we only had an :extract action
 alias_method :extract_options, :options
 alias_method :extract_to, :destination
@@ -45,18 +49,28 @@ action :extract do
   description 'Extract and archive file.'
 
   unless ::File.exist?(new_resource.path)
-    raise Errno::ENOENT, "No archive found at #{new_resource.path}!"
+    raise Errno::ENOENT, "No archive found at #{new_resource.path}! Cannot continue."
   end
 
-  unless Dir.exist?(new_resource.destination)
+  if !::File.exist?(new_resource.destination)
+    Chef::Log.trace("File or directory does not exist at destination path: #{new_resource.destination}")
+
     converge_by("create directory #{new_resource.destination}") do
       FileUtils.mkdir_p(new_resource.destination, mode: new_resource.mode.to_i)
     end
-  end
 
-  converge_by("extract #{new_resource.path} to #{new_resource.destination}") do
-    extract(new_resource.path, new_resource.destination,
-      Array(new_resource.options))
+    extract(new_resource.path, new_resource.destination, Array(new_resource.options))
+  else
+    Chef::Log.trace("File or directory exists at destination path: #{new_resource.destination}.")
+
+    if new_resource.overwrite == true ||
+       (new_resource.overwrite == :auto && archive_differs_from_disk?(new_resource.path, new_resource.destination))
+      Chef::Log.debug("Overwriting existing content at #{new_resource.destination} due to resource's overwrite property settings.")
+
+      extract(new_resource.path, new_resource.destination, Array(new_resource.options))
+    else
+      Chef::Log.debug("Not extracting archive as #{new_resource.destination} exists and resource not set to overwrite.")
+    end
   end
 
   if new_resource.owner || new_resource.group
@@ -82,17 +96,17 @@ action_class do
     }
   end
 
+  # try to determine if the resource has updated or not by checking for files that are in the
+  # archive, but not on disk or files with a non-matching mtime
+  #
   # @param [String] src
   # @param [String] dest
-  # @param [Array] options
   #
   # @return [Boolean]
-  def extract(src, dest, options = [])
+  def archive_differs_from_disk?(src, dest)
     require 'ffi-libarchive'
 
-    flags = [options].flatten.map { |option| extract_option_map[option] }.compact.reduce(:|)
     modified = false
-
     Dir.chdir(dest) do
       archive = Archive::Reader.open_filename(src)
 
@@ -103,11 +117,32 @@ action_class do
         else
           modified = true
         end
-
-        archive.extract(e, flags.to_i)
       end
-      archive.close
     end
     modified
+  end
+
+  # extract the archive
+  #
+  # @param [String] src
+  # @param [String] dest
+  # @param [Array] options
+  #
+  # @return [void]
+  def extract(src, dest, options = [])
+    require 'ffi-libarchive'
+
+    converge_by("extract #{src} to #{dest}") do
+      flags = [options].flatten.map { |option| extract_option_map[option] }.compact.reduce(:|)
+
+      Dir.chdir(dest) do
+        archive = Archive::Reader.open_filename(src)
+
+        archive.each_entry do |e|
+          archive.extract(e, flags.to_i)
+        end
+        archive.close
+      end
+    end
   end
 end
