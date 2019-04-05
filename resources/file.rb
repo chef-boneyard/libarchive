@@ -109,12 +109,14 @@ action_class do
     modified = false
     Dir.chdir(dest) do
       archive = Archive::Reader.open_filename(src)
-
+      Chef::Log.trace("Beginning the comparison of file mtime between contents of #{src} and #{dest}")
       archive.each_entry do |e|
         pathname = ::File.expand_path(e.pathname)
         if ::File.exist?(pathname)
+          Chef::Log.trace("#{pathname} mtime is #{::File.mtime(pathname)} and archive is #{e.mtime}")
           modified = true unless ::File.mtime(pathname) == e.mtime
         else
+          Chef::Log.trace("#{pathname} doesn't exist on disk, but exists in the archive")
           modified = true
         end
       end
