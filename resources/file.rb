@@ -18,13 +18,13 @@ property :path, String,
          description: "An optional property to set the file path to the archive to extract if it differs from the resource block's name."
 
 property :owner, String,
-         description: 'The owner of the extracted files'
+         description: 'The owner of the extracted files.'
 
 property :group, String,
-         description: 'The group of the extracted files'
+         description: 'The group of the extracted files.'
 
 property :mode, [String, Integer],
-         description: 'The mode of the extracted files',
+         description: 'The mode of the extracted files.',
          default: '755'
 
 property :destination, String,
@@ -32,11 +32,11 @@ property :destination, String,
          required: true
 
 property :options, [Array, Symbol],
-         description: 'An array of symbols representing extraction flags. Example: :no_overwrite to prevent overwriting files on disk.',
-         default: lazy { [] }
+         description: 'An array of symbols representing extraction flags. Example: :no_overwrite to prevent overwriting files on disk. By default this properly sets :time which preserves the modification timestamps of files in the archive when writing them to disk.',
+         default: lazy { [:time] }
 
 property :overwrite, [TrueClass, FalseClass, :auto],
-         description: 'Should the resource overwrite the destination file contents if they already exist? If set to :auto the date stamp of files within the archive will be compared to those on disk, and if newer the disk contents will be overwritten. Be aware that this method does not work for all archive types, and should be tested before being used as it may result in the files being replaced during each client run.',
+         description: 'Should the resource overwrite the destination file contents if they already exist? If set to :auto the date stamp of files within the archive will be compared to those on disk and disk contents will be overwritten if they differ. This may cause unintented consequences if on disk date stamps are changed between runs, which will result in the files being overwritten during each client run. Make sure to properly test any change to this property.',
          default: false
 
 # backwards compatibility for the legacy names when we only had an :extract action
