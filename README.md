@@ -4,6 +4,10 @@
 
 Resources for extracting archives of all types with Chef
 
+## Deprecated
+
+The `archive_file` resource is now built into Chef Infra Client 15+ so this cookbook is no longer necessary.
+
 ## Requirements
 
 - Chef >= 14.0
